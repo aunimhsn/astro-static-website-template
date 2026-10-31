@@ -1,0 +1,17 @@
+{
+  "$comment": "The interface texts shared by every page, in French: no French text is written in a layout or a component (CLAUDE.md, Language). Replace the values at the setup of a project.",
+  "site": {
+    "name": "Nom du site",
+    "ogLocale": "fr_FR",
+    "cardAlt": "Le logo et l’adresse du site."
+  },
+  "skipLink": "Aller au contenu",
+  "nav": {
+    "label": "Navigation principale",
+    "home": "Accueil"
+  },
+  "footer": {
+    "legal": "Mentions légales",
+    "copyright": "© {year} Nom du site"
+  }
+}

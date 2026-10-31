@@ -1,0 +1,43 @@
+# Roadmap
+
+Steps of the site described in [specs.md](specs.md), following the phases of [process.md](process.md). Each step is delivered in its own pull request, which checks its box.
+
+## Reference
+
+Read only by the steps that need them:
+
+- [Technical choices](docs/technical-choices.md): the stack, the commands and the main designs, with their reasons.
+- [Branding](docs/branding.md): the brand assets, the visual identity and every design decision of the mock-up, with the tokens.
+- [External services](docs/external-services.md): limits and terms of the services, and the risks accepted by the owner.
+- [Roadmap archive](docs/roadmap-archive.md): the detail of the steps done, moved there once their pull request is merged.
+
+## Steps
+
+<!--
+The usual steps of a site; adapt them in step 1, one line per step done with its pull requests.
+-->
+
+- [ ] **0. Project setup**: the Project section of `CLAUDE.md`, the name of the site, the port of the mock-up server, the repository settings.
+- [ ] **1. Specifications**: audiences, value proposition, content tree (Excalidraw), URLs and redirects, brand assets, external services.
+- [ ] **2. Wireframes**: one Excalidraw wireframe per page type, phone first.
+- [ ] **3. Mock-up**: 3 or 4 styles, then every page of the first release in `docs/mockups/`, checked on the owner's phone; decisions in `docs/branding.md`.
+- [ ] **4. Design system**: the tokens in `docs/branding.md`, the mock-up rewritten to use only them, an entry in `design-journal.md`.
+- [ ] **5. Skeleton and deployment**: the tokens and fonts of the mock-up in `src/styles/`, the brand assets (`npm run brand:images`), the header and footer, the deployment to the `github.io` preview.
+- [ ] **6. Pages**: one step per page type, as specified.
+- [ ] **7. Launch**: the site checked on the preview, the DNS switched by the owner, the custom domain and HTTPS.
+- [ ] **8. Retrospective**: the lessons in `process.md`, and in the template when they apply to every website.
+- [ ] **9. Polish** (optional): the touches of the « Later » list picked by the owner, one small pull request each.
+
+A next cycle adds its steps under a heading of its own (« Cycle 2: … »), numbered after the last one (process.md, Next cycle). The steps may be split into sub-steps when a pull request grows too large.
+
+## Later
+
+<!--
+What is noted and not planned yet, so that nothing is lost between sessions:
+- Polish: the small touches, for phase 9 (e.g. « the hover of the cards feels slow », « compress the photo of the about page »).
+- Next cycle: the larger ideas, for phase 10 (e.g. « a testimonials section once three are collected »).
+-->
+
+### Polish
+
+### Next cycle

@@ -1,0 +1,18 @@
+{
+  "$comment": "The legal notice (in France, article 6 of the LCEN): the publisher and the host. Fill it from specs.md (Contact details and legal information) and record the accepted risks in docs/external-services.md.",
+  "title": "Mentions légales",
+  "description": "L’éditeur et l’hébergeur du site.",
+  "sections": [
+    {
+      "heading": "Éditeur",
+      "lines": ["Nom ou raison sociale", "Statut, SIRET", "Adresse e-mail"]
+    },
+    {
+      "heading": "Hébergement",
+      "lines": [
+        "GitHub, Inc. (GitHub Pages)",
+        "88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis"
+      ]
+    }
+  ]
+}

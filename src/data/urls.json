@@ -1,0 +1,8 @@
+{
+  "$comment": "The addresses that must keep working (specs.md, URLs and redirects). redirects: each former path and the page it leads to, written by astro.config.mjs as a redirect page. pages: the former paths kept as pages. dropped: the former paths that must lead to the not-found page. scripts/check-urls.mjs checks all three on the build.",
+  "redirects": {
+    "/legal": "/mentions-legales/"
+  },
+  "pages": ["/"],
+  "dropped": []
+}

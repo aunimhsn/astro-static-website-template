@@ -1,0 +1,48 @@
+# Builds the site and deploys it to GitHub Pages on every push to main, that is when a pull
+# request is merged. From the Astro guide: https://docs.astro.build/en/guides/deploy/github/
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# One deployment at a time; a newer push waits instead of cancelling one in progress.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    # The template repository itself has no site to publish; a repository made from it does.
+    if: ${{ !github.event.repository.is_template }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: withastro/action@v6
+        with:
+          node-version: 24 # The version of .nvmrc, which the action can't read.
+        # Until the domain points to GitHub Pages, the site is checked at its github.io address,
+        # under a base path: set the repository variables SITE_URL (https://<owner>.github.io)
+        # and BASE_PATH (/<repository>), and delete them at the launch (docs/technical-choices.md,
+        # Deployment). Unset, the site is built for the address of astro.config.mjs.
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          BASE_PATH: ${{ vars.BASE_PATH }}
+
+  # Only the job that publishes may write to GitHub Pages.
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

@@ -1,0 +1,25 @@
+---
+// The not-found page, written as 404.html, which GitHub Pages serves for every path without a
+// page: no canonical link and noindex. Its texts are in src/content/not-found.json.
+import page from "../content/not-found.json";
+import SiteLayout from "../layouts/site-layout.astro";
+import { href } from "../lib/url";
+---
+
+<SiteLayout title={page.title} description={page.description} noindex>
+  <div class="wrap">
+    <h1>{page.heading}</h1>
+    <p>{page.lead}</p>
+    <a href={href("/")}>{page.home}</a>
+  </div>
+</SiteLayout>
+
+<style>
+  .wrap {
+    padding-block: var(--space-16);
+  }
+
+  h1 {
+    font-size: var(--size-title);
+  }
+</style>

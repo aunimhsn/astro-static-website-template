@@ -1,0 +1,43 @@
+---
+// The frame of every page: a link to skip to the content, the header, the content in main and the
+// footer. main clips what runs past the sides of the screen (src/styles/global.css): anything
+// that may, as a large faded word, goes inside it.
+import SiteFooter from "../components/site-footer.astro";
+import SiteHeader from "../components/site-header.astro";
+import fr from "../i18n/fr.json";
+import BaseLayout from "./base-layout.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+}
+
+const props = Astro.props;
+---
+
+<BaseLayout {...props}>
+  <a class="skip-link visually-hidden" href="#content">
+    {fr.skipLink}
+  </a>
+  <SiteHeader />
+  <main id="content" tabindex="-1">
+    <slot />
+  </main>
+  <SiteFooter />
+</BaseLayout>
+
+<style>
+  .skip-link:focus {
+    position: fixed;
+    z-index: 10;
+    top: var(--space-2);
+    left: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-background);
+  }
+
+  main:focus {
+    outline: none;
+  }
+</style>
