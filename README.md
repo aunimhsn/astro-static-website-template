@@ -2,18 +2,20 @@
 
 Template for static brand websites built with [Astro](https://astro.build/) and hosted on GitHub Pages, with the project conventions, the process from an idea to a site online, and the Claude Code setup. First used for [sylent.art](https://github.com/aunimhsn/sylent.art).
 
+![The process: the backlog feeds the roadmap; each change goes through the tools it needs to a pull request; a cycle ends with the launch and the retrospective.](docs/process.svg)
+
 ## What it contains
 
 | File | Content |
 |---|---|
-| `process.md` | The phases from an idea to a site online: repository, specifications (content tree, brand assets), wireframes, mock-up, design system, build, launch, retrospective, then an optional polish and the next cycle. |
+| `process.md`, `docs/process.svg` | How a site goes from an idea to online and keeps growing: a toolbox (specifications, structure, wireframes, mock-up, design system, build, launch, retrospective) picked for each change, a backlog and a roadmap, the urgent fixes and the explorations, with its diagram. |
 | `design-journal.md` | The design experiences of past projects: choices kept and rejected, and why. A source of ideas, not rules. |
 | `CLAUDE.md` | Rules for Claude Code: communication, naming, language and French typography, specifications and roadmap, Git workflow, commit messages, code review, checks, deployment. |
 | `.claude/agents/code-reviewer.md` | Subagent that reviews a branch before its pull request and writes its notes, in French, to `outputs/`. |
 | `.claude/skills/excalidraw-wireframes/` | Skill: editable Excalidraw wireframes and content trees, iterated with the owner. |
 | `.claude/skills/html-mockups/` | Skill: the HTML mock-up built from the wireframes, styles and open decisions compared with tabs, a server without cache, then the design tokens. |
 | `.claude/settings.json` | The claude.ai connectors turned off and the unused skills hidden from the model, to save tokens. |
-| `specs.md`, `roadmap.md` | Skeletons of the specifications and of the roadmap (the usual steps of a site, and a « Later » list for the polish and the next cycle). |
+| `specs.md`, `roadmap.md`, `backlog.md` | Skeletons of the specifications, of the roadmap (the size of the project and the steps of the first cycle) and of the backlog (polish, edge cases, features, large works, waiting on others). |
 | `docs/technical-choices.md` | The stack and its reasons, the commands, the deployment, the checks. |
 | `docs/branding.md` | The brand assets to ask for, then the visual identity and every design decision, with the tokens. |
 | `docs/external-services.md` | The limits and terms of GitHub Pages, and the risks accepted by the owner. |
@@ -50,7 +52,7 @@ Template for static brand websites built with [Astro](https://astro.build/) and 
    npm run check
    ```
 
-7. With Claude Code, follow [process.md](process.md): write `specs.md` (content tree and brand assets first), then split it into steps in `roadmap.md`.
+7. With Claude Code, follow [process.md](process.md): size the project, then write `specs.md` (brand assets and content tree first), and split it into steps in `roadmap.md`.
 8. Adapt this README to the project: keep the Requirements, Development and Deployment sections, replace the others.
 
 ## Requirements
