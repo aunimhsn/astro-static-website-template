@@ -1,0 +1,79 @@
+/* The base styles and the classes shared by every page. The styles of a component live in its
+   <style> block, which Astro scopes to it. */
+@import url("./tokens.css");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+  background: var(--color-background);
+  color: var(--color-text);
+  font: var(--size-body) / var(--line-body) var(--font-text);
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+/* Anything that may run past the side of the screen (a large faded word, a wide image) stays
+   inside main, which clips it: on a phone, Chrome would otherwise widen the page to show it.
+   clip, unlike hidden, makes no scroll container, so the sticky blocks keep working.
+   scripts/check-overflow.mjs fails on a page wider than the screen. */
+main {
+  overflow-x: clip;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-title);
+  line-height: var(--line-title);
+  text-wrap: balance;
+}
+
+a {
+  color: var(--color-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* The width of the content, with the side margins of a phone. */
+.wrap {
+  width: min(100% - 2 * var(--gutter), var(--width-content));
+  margin-inline: auto;
+}
+
+/* Read by screen readers, hidden on screen. */
+.visually-hidden:not(:focus, :active) {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

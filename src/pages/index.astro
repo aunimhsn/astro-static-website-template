@@ -1,0 +1,31 @@
+---
+// The home page. Its texts are in src/content/home.json.
+import page from "../content/home.json";
+import SiteLayout from "../layouts/site-layout.astro";
+---
+
+<SiteLayout title={page.title} description={page.description}>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <h1 id="hero-title">{page.heading}</h1>
+      <p class="lead">{page.lead}</p>
+    </div>
+  </section>
+</SiteLayout>
+
+<style>
+  .hero {
+    padding-block: var(--space-16);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: var(--size-display);
+  }
+
+  .lead {
+    max-width: var(--width-text);
+    margin: var(--space-6) 0 0;
+    color: var(--color-text-weak);
+  }
+</style>

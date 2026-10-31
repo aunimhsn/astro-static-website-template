@@ -1,0 +1,41 @@
+/* The design tokens: the named values of the visual design, written once here and used by every
+   component (`color: var(--color-accent)`), so that changing a color or a size means changing one
+   line. These are neutral starting values: the mock-up replaces them, and docs/branding.md
+   records each one with its reason. The breakpoints can't be variables, since a media query
+   doesn't read them: they are listed in docs/branding.md (Layout). */
+:root {
+  /* Colors: contrast checked against WCAG AA in docs/branding.md. */
+  --color-background: #ffffff;
+  --color-surface: #f4f4f5;
+  --color-border: #d4d4d8;
+  --color-text: #18181b;
+  --color-text-weak: #52525b;
+  --color-accent: #1d4ed8;
+  --color-focus: #1d4ed8;
+
+  /* Spacing: --space-N = N × 4 px. */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Typography: one size per role rather than a scale. */
+  --font-text: system-ui, sans-serif;
+  --font-title: system-ui, sans-serif;
+  --size-display: clamp(36px, 8vw, 64px);
+  --size-title: 28px;
+  --size-body: 17px;
+  --size-label: 14px;
+  --line-body: 1.6;
+  --line-title: 1.15;
+
+  /* Layout and shapes. */
+  --width-content: 1100px;
+  --width-text: 68ch;
+  --gutter: var(--space-4);
+  --radius: 8px;
+}

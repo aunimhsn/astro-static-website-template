@@ -1,0 +1,34 @@
+---
+// The legal notice. Its texts are in src/content/legal.json.
+import page from "../content/legal.json";
+import SiteLayout from "../layouts/site-layout.astro";
+---
+
+<SiteLayout title={page.title} description={page.description}>
+  <div class="wrap">
+    <h1>{page.title}</h1>
+    {page.sections.map(({ heading, lines }) => (
+      <section>
+        <h2>{heading}</h2>
+        {lines.map((line) => (
+          <p>{line}</p>
+        ))}
+      </section>
+    ))}
+  </div>
+</SiteLayout>
+
+<style>
+  .wrap {
+    max-width: var(--width-text);
+    padding-block: var(--space-12);
+  }
+
+  h1 {
+    font-size: var(--size-title);
+  }
+
+  p {
+    margin: 0;
+  }
+</style>

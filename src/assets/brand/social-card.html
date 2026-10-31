@@ -1,0 +1,52 @@
+<!doctype html>
+<!--
+  The card that LinkedIn, Facebook and the messaging apps show for a link to the site, drawn at
+  1200 × 630 px by `npm run brand:images` into social-card.png. Design it in the style of the site
+  (docs/branding.md): the logo, the name and the address, large enough to read on a phone. Keep
+  the important part away from the edges: some apps crop the card to a square.
+-->
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Carte d’aperçu</title>
+    <style>
+      html,
+      body {
+        width: 1200px;
+        height: 630px;
+        margin: 0;
+      }
+
+      body {
+        display: grid;
+        place-content: center;
+        justify-items: center;
+        gap: 32px;
+        background: #18181b;
+        color: #ffffff;
+        font-family: system-ui, sans-serif;
+      }
+
+      img {
+        width: 160px;
+        height: 160px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 64px;
+        font-weight: 700;
+      }
+
+      small {
+        font-size: 32px;
+        opacity: 0.7;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="icon.svg" alt="" />
+    <p>Nom du site</p>
+    <small>example.com</small>
+  </body>
+</html>

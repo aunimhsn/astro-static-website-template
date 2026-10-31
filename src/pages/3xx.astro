@@ -1,0 +1,50 @@
+---
+// The page that Astro writes for each redirect of the static build (experimental.redirectPage in
+// astro.config.mjs). GitHub Pages has no server-side redirects, so the page leads on at once with
+// a <meta http-equiv="refresh">, and tells the search engines the new address with its canonical
+// link. The visitor barely sees it: a plain page in the language of the site, without the fonts
+// and the scripts, with a link in case the browser doesn't follow the refresh. Its texts are in
+// src/content/redirect.json.
+import page from "../content/redirect.json";
+
+interface Props {
+  to: string;
+  delay: number;
+}
+
+const { to, delay } = Astro.props;
+const canonical = new URL(to, Astro.site);
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{page.title}</title>
+    <meta http-equiv="refresh" content={`${delay};url=${to}`} />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={canonical} />
+    <style>
+      /* The colors of src/styles/tokens.css, written here so that the page loads nothing. */
+      body {
+        margin: 0;
+        padding: 24px;
+        background: #ffffff;
+        color: #18181b;
+        font:
+          16px / 1.5 system-ui,
+          sans-serif;
+      }
+
+      a {
+        color: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      {page.text} <a href={to}>{page.link}</a>
+    </p>
+  </body>
+</html>

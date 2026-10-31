@@ -1,0 +1,6 @@
+# The project documentation, written by hand: Prettier would pad every table to its widest
+# cell. The content of the site (src/content/) is formatted.
+/*.md
+/docs/
+/.claude/
+package-lock.json
