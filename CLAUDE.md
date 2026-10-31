@@ -119,6 +119,7 @@ Follow [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.
 - Before opening any pull request that changes code or its build (layouts, components, styles, scripts, Astro config, dependencies, `.github/workflows/`), run the `code-reviewer` subagent (`.claude/agents/code-reviewer.md`) on the branch. A pull request that only changes content or documentation doesn't need it.
 - It writes its recommendations, in French, to `outputs/<YYYY-MM-DD>-<branch>-code-review.md`. These notes are ignored by Git.
 - Summarize the recommendations to the owner, apply only the ones they approve, then open the pull request: never before the owner has chosen.
+- When the owner asks to look at the Dependabot pull requests (the dependency updates, `.github/dependabot.yml`), run the `dependency-reviewer` subagent (`.claude/agents/dependency-reviewer.md`): it writes, in French, to `outputs/<YYYY-MM-DD>-dependency-review.md`, a recommendation for each one, with its link and the comment to post. Give the owner its summary table; never merge, close or comment a Dependabot pull request yourself unless the owner asks.
 
 ## Development
 

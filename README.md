@@ -12,6 +12,7 @@ Template for static brand websites built with [Astro](https://astro.build/) and 
 | `design-journal.md` | The design experiences of past projects: choices kept and rejected, and why. A source of ideas, not rules. |
 | `CLAUDE.md` | Rules for Claude Code: communication, naming, language and French typography, specifications and roadmap, Git workflow, commit messages, code review, checks, deployment. |
 | `.claude/agents/code-reviewer.md` | Subagent that reviews a branch before its pull request and writes its notes, in French, to `outputs/`. |
+| `.claude/agents/dependency-reviewer.md` | Subagent that reviews the open Dependabot pull requests and tells, in French, which to merge or set aside, with their links and the comments to post. |
 | `.claude/skills/excalidraw-wireframes/` | Skill: editable Excalidraw wireframes and content trees, iterated with the owner. |
 | `.claude/skills/html-mockups/` | Skill: the HTML mock-up built from the wireframes, styles and open decisions compared with tabs, a server without cache, then the design tokens. |
 | `.claude/settings.json` | The claude.ai connectors turned off and the unused skills hidden from the model, to save tokens. |
