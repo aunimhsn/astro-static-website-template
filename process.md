@@ -1,43 +1,99 @@
 # Process
 
-How a static website goes from an idea to a site online, with Claude Code. It follows the process of [rust-cli-template](https://github.com/aunimhsn/rust-cli-template/blob/main/process.md), adapted to a website: the release becomes the launch on GitHub Pages. Each phase ends with something to validate before the next one starts: changing a sentence in the specifications costs less than changing a wireframe, which costs less than changing code.
+How a static website goes from an idea to a site online, then keeps growing, with Claude Code. It follows the process of [rust-cli-template](https://github.com/aunimhsn/rust-cli-template/blob/main/process.md), adapted to a website: the release becomes the launch on GitHub Pages.
 
-This file is a living document: update it with what worked and what didn't (see [Retrospective](#8-retrospective)), and bring back to the template the lessons that apply to every website.
+The process is not a straight line. Its phases are **tools**, picked for each change according to what it needs: a text goes straight to the build, a new page type goes through its wireframe and mock-up first. What is not being done lives in a **backlog**; what is chosen goes to the **roadmap**, one pull request per step. Each tool ends with something the owner validates, from the cheapest to the most expensive: changing a sentence in the specifications costs less than changing a wireframe, which costs less than changing code.
 
-```
-1. Repository ─▶ 2. Specs ─▶ 3. Wireframes ─▶ 4. Mock-up ─▶ 5. Design system ─▶ 6. Build ─▶ 7. Launch ─▶ 8. Retrospective ─▶ 9. Polish ─▶ 10. Next cycle
-   setup           specs.md     Excalidraw       HTML           tokens             one PR       github.io     process.md           (optional)    back to 2
-                   content tree                                 branding.md        per step     then DNS                           small PRs     for its scope
-                   brand assets
-                       ▲                                                                                                                               │
-                       └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-```
+This file is a living document: update it with what worked and what didn't (see [Retrospective](#retrospective)), and bring back to the template the lessons that apply to every website.
 
-| Phase | Output | Done when |
-|---|---|---|
-| [1. Repository](#1-repository) | The repository created from the template, its settings | `main` is protected and the setup pull request is merged. |
-| [2. Specifications](#2-specifications) | `specs.md`, the content tree, `roadmap.md`, notes of `docs/` | The owner has answered the open questions and merged them. |
-| [3. Wireframes](#3-wireframes) | `docs/wireframes/*.excalidraw` | The owner has edited and approved the layout of every page type. |
-| [4. Mock-up](#4-mock-up) | `docs/mockups/*.html` | Every page and state looks right at every width, on the owner's phone too. |
-| [5. Design system](#5-design-system) | Design tokens and decisions in `docs/branding.md` | Colors, sizes and typography are written as tokens. |
-| [6. Build](#6-build) | One pull request per roadmap step | Every box of `roadmap.md` is checked. |
-| [7. Launch](#7-launch) | Site on `github.io`, then on its domain | The owner has checked the site and switched the DNS. |
-| [8. Retrospective](#8-retrospective) | Changes to this file and to the template | The lessons are written down. |
-| [9. Polish](#9-polish) (optional) | Small pull requests from the « Later » list | The touches the owner picked are online. |
-| [10. Next cycle](#10-next-cycle) | `specs.md` updated, new steps in `roadmap.md` | The owner has approved the scope of the cycle; phases 2 to 8 start again for it. |
+![The process: the backlog feeds the roadmap; each change goes through the tools it needs to a pull request; a cycle ends with the launch and the retrospective, whose leftovers go back to the backlog.](docs/process.svg)
 
-## 1. Repository
+## How it works
+
+1. **Start a project** from the template, and size it with the owner: which tools this project uses, and how far (see [Size the project](#size-the-project)).
+2. **The first cycle** takes the site to its launch, through every tool in order: specifications, structure, wireframes, mock-up, design system, build, launch, retrospective.
+3. **Then the loop**: with the owner, pick from the [backlog](#the-backlog) what comes next, write it in `roadmap.md` as steps, size each change and split it into sub-steps when it helps ([Size a change](#size-a-change)), and run only the tools it needs. A group of steps with a goal (« testimonials and an English version ») is a **cycle**: it ends with its retrospective, and with a launch when it changes the addresses or the domain.
+4. **Outside the roadmap**, two kinds of work: an [urgent fix](#urgent-fixes) that can't wait, and an [exploration](#explorations) that tries an idea before deciding.
+
+## Size the project
+
+At the setup, Claude Code asks how large the project is and proposes the tools and their depth; the owner decides, and the choice is written at the top of `roadmap.md`. The template is made for a full site; a smaller one skips what it doesn't need without breaking a rule.
+
+| Project | Tools |
+|---|---|
+| One page (a landing page, an event) | Short specifications, one wireframe, 2 styles in the mock-up, tokens written straight into `src/styles/tokens.css`, build, launch. |
+| A brand site of a few page types (the usual case, as sylent.art) | Every tool, in order, for the first cycle. |
+| A site with a lot of content (a catalog, a blog) | Every tool, with the structure first and the content collections designed before the wireframes. |
+
+## Size a change
+
+At the start of each step, Claude Code says which tools the change needs, and why; the owner may add or remove one.
+
+| Change | Tools |
+|---|---|
+| A text, a fix, a dependency | Build. |
+| A visual touch, a new component | Mock-up (a tab group to compare), then build; the decision in `docs/branding.md`. |
+| A new page of an existing type | Specifications, then build. |
+| A new page type | Specifications, wireframe, mock-up, build. |
+| A new grouping of the content, new addresses | Specifications and structure first (with the redirects), then the tools of the pages it touches. |
+| A new site, a redesign | Every tool, in order. |
+
+Only when it helps, a step is split into sub-steps, one pull request each, each one coherent and tested on its own: a step that needs several tools, or more than one review (on sylent.art, the classification of the offers became 13a (specifications), 13b (wireframe and mock-up) and 13c (build)). A small step stays whole, since each pull request also costs a review, the checks and an archive.
+When a step turns out larger than sized (a text change that questions the structure), stop and size it again with the owner rather than stretching the pull request.
+
+## The backlog
+
+`backlog.md` holds everything noted and not being done: an evolving list, read when the next work is chosen, not at every session (`roadmap.md` stays short).
+
+- **What goes in**: the touches set aside during a step (polish), the edge cases that need thought, the features for later, the large works, and what waits on someone else (testimonials, the owner's course material).
+- **One entry per item**: what it is in one sentence, its kind (polish, edge case, feature, large work, waiting), what it depends on, and the date it was noted. Claude Code adds an entry as soon as an idea comes up outside the current step, rather than keeping it only in its memory.
+- **From the backlog to the roadmap**: when the roadmap has no step left, or at the end of a cycle, Claude Code proposes the next items with their cost and dependencies; the owner picks; the chosen items leave the backlog and become steps of `roadmap.md`.
+- **Polish**: after a launch, a series of small touches from the backlog, one small pull request each, is often worth doing before anything new.
+- At each retrospective, the backlog is sorted: what is done or no longer wanted leaves it.
+
+## Urgent fixes
+
+A fix that can't wait (a broken page online, a security alert, a wrong contact detail) jumps the roadmap:
+
+1. Branch `fix/<short-description>` from `main`, even while a step is in progress (prepare it in a worktree if the owner is testing the step in the main folder).
+2. The fix, the check that would have caught it, the code review if it changes code, a pull request opened at once.
+3. Once merged, one line in `roadmap.md`, under the step in progress, and the step goes on (rebased on `main`).
+
+## Explorations
+
+An idea that needs trying before deciding (a 3D scene, a video for the launch, a new tool) is an exploration, not a step. It happens at any time: during a step, when a choice needs trying before it is made (on sylent.art, whether a 3D scene runs on a phone, during the mock-up); or between steps, from an idea of the backlog (the launch videos).
+
+1. A branch `explore/<short-description>`, or a page in the scratchpad: nothing of it is merged as it is.
+2. Bounded: the owner and Claude Code agree on what it must answer (« can a scene of 3D cubes run on a phone? »).
+3. It ends with its result written down: during a step, the decision goes back to the step (and to `docs/`); otherwise a decision in `docs/` (kept or set aside, and why), an entry of the backlog, or a step of the roadmap that rebuilds it properly. The branch is then deleted, or kept with a line in the backlog that says why.
+
+## The tools
+
+| Tool | Use it when | Output | Done when |
+|---|---|---|---|
+| [Start a project](#start-a-project) | Once, at the start | The repository from the template, its settings, the size of the project | `main` is protected and the setup pull request is merged. |
+| [Specifications](#specifications) | The site says or does something new | `specs.md`, the brand assets, the external services | The owner has answered the open questions and merged them. |
+| [Structure](#structure) | The content is grouped differently, the addresses change | The content tree in Excalidraw, the URLs in `specs.md` and `src/data/urls.json` | The owner has moved the cards and chosen a lead. |
+| [Wireframes](#wireframes) | A new page type, a new layout | `docs/wireframes/*.excalidraw` | The owner has edited and approved the layout. |
+| [Mock-up](#mock-up) | Any visual choice | `docs/mockups/*.html` | Every page and state looks right at every width, on the owner's phone too. |
+| [Design system](#design-system) | At the end of a mock-up, a new token | Tokens and decisions in `docs/branding.md` | Colors, sizes and typography are written as tokens. |
+| [Build](#build) | Always | One pull request per step | The step's box of `roadmap.md` is checked. |
+| [Launch](#launch) | The first cycle, a new domain or new addresses | Site on `github.io`, then on its domain | The owner has checked the site and switched the DNS. |
+| [Retrospective](#retrospective) | The end of a cycle, or a phase that went badly | Changes to this file, the templates and the backlog | The lessons are written down. |
+
+## Start a project
 
 1. Create the repository from the template (see the README, **Start a new project**).
 2. Apply the pull request settings: squash merging only, branches deleted once merged.
 3. Protect `main` with a ruleset. On a free GitHub account, rulesets only apply to **public** repositories.
-4. Setup pull request: the **Project** section of `CLAUDE.md`, the name of the site in `package.json`, `astro.config.mjs` and `src/i18n/fr.json`, a port of its own for the mock-up server in `docs/technical-choices.md` (Commands).
-5. Open Claude Code in the project folder. Its memory is stored per project: a new session doesn't remember a conversation held in another project. To carry context over, paste a summary of it.
-6. Check the connectors: `.claude/settings.json` turns off the claude.ai connectors (`disableClaudeAiConnectors`), whose instructions and tools would be sent with every message. If the project needs one, remove the setting; `/mcp` lists the servers that are on, and `/context` what fills the context. In the same file, `skillOverrides` hides from the model the skills the project doesn't use (still available with `/<name>`): adjust the list, or use `/skills`. The skills of the project are in `.claude/skills/`, copied from the template.
+4. Size the project with the owner ([Size the project](#size-the-project)), and write the tools kept at the top of `roadmap.md`, with the steps of the first cycle.
+5. Setup pull request: the **Project** section of `CLAUDE.md`, the name of the site in `package.json`, `astro.config.mjs` and `src/i18n/fr.json`, a port of its own for the mock-up server in `docs/technical-choices.md` (Commands), the size of the project in `roadmap.md`.
+6. Open Claude Code in the project folder. Its memory is stored per project: a new session doesn't remember a conversation held in another project. To carry context over, paste a summary of it.
+7. Check the connectors: `.claude/settings.json` turns off the claude.ai connectors (`disableClaudeAiConnectors`), whose instructions and tools would be sent with every message. If the project needs one, remove the setting; `/mcp` lists the servers that are on, and `/context` what fills the context. In the same file, `skillOverrides` hides from the model the skills the project doesn't use (still available with `/<name>`): adjust the list, or use `/skills`. The skills of the project are in `.claude/skills/`, copied from the template.
 
-## 2. Specifications
+## Specifications
 
-Goal: agree on **what** the site says and does before deciding **how**.
+Goal: agree on **what** the site says and does before deciding **how**. For a change after the first cycle, only the sections it touches.
 
 1. Describe the idea in a few sentences, then let Claude Code ask its questions, in batches of a few at a time. The usual ones for a brand site:
    - Who are the visitors, who decides, and what must they find before getting in touch?
@@ -45,14 +101,22 @@ Goal: agree on **what** the site says and does before deciding **how**.
    - Which offers or contents, grouped how, with which details?
    - What is the main action of the visitor, and what happens after it?
    - Is there a former site, whose URLs must keep working?
-2. **Draw the content tree in Excalidraw** before the wireframes: what the site offers, grouped how, with the current state and two leads side by side, one group per item so that the owner moves them by hand. The URLs follow from it: settle them in the same phase, and write the former ones in `src/data/urls.json`. On sylent.art, the classification came after the build: the URLs changed twice and the offer pages were rebuilt.
-3. **Ask for the brand assets**, and record in `docs/branding.md` (Brand assets) what is given and what is missing: the logo (symbol and wordmark) on a dark and on a light background, in SVG if possible; a square icon for the favicon; the colors and fonts of an existing charter, with the license of each font; the photos and their rights; the logos of the partners or clients and the permission to show them; the public contact details and the legal information. The favicon and the preview card of the links are made from them (`npm run brand:images`).
-4. **Check the external services early** (GitHub Pages, and a form service or analytics if the site needs one): documentation, limits, terms of use, personal data, licenses of the images and fonts. Record the limits and every risk the owner accepts, with its date, in `docs/external-services.md`.
-5. Write `specs.md`: behavior and content only (what the visitor sees, what each action does, the URLs and redirects, edge cases).
-6. Confirm or adapt the technical choices of `docs/technical-choices.md`, with their reasons (and the alternatives rejected), then write the steps in `roadmap.md`, each small enough for one pull request. Choose only what the specifications need: the JavaScript libraries and the weight of script a page may carry wait for the mock-up (on sylent.art, « no JavaScript » was written before the mock-up and replaced after it by GSAP and Three.js).
-7. Open the pull request; the owner reads the files on GitHub (**Files changed**) or in VS Code.
+2. **Ask for the brand assets**, and record in `docs/branding.md` (Brand assets) what is given and what is missing: the logo (symbol and wordmark) on a dark and on a light background, in SVG if possible; a square icon for the favicon; the colors and fonts of an existing charter, with the license of each font; the photos and their rights; the logos of the partners or clients and the permission to show them; the public contact details and the legal information. The favicon and the preview card of the links are made from them (`npm run brand:images`).
+3. **Check the external services early** (GitHub Pages, and a form service or analytics if the site needs one): documentation, limits, terms of use, personal data, licenses of the images and fonts. Record the limits and every risk the owner accepts, with its date, in `docs/external-services.md`.
+4. Write `specs.md`: behavior and content only (what the visitor sees, what each action does, the URLs and redirects, edge cases).
+5. Confirm or adapt the technical choices of `docs/technical-choices.md`, with their reasons (and the alternatives rejected), then write the steps in `roadmap.md`, each small enough for one pull request. Choose only what the specifications need: the JavaScript libraries and the weight of script a page may carry wait for the mock-up (on sylent.art, « no JavaScript » was written before the mock-up and replaced after it by GSAP and Three.js).
+6. Open the pull request; the owner reads the files on GitHub (**Files changed**) or in VS Code.
 
-## 3. Wireframes
+## Structure
+
+Goal: agree on how the content is grouped, and so on the addresses, before drawing the pages. On sylent.art, the classification of the offers came after the build: the URLs changed twice and the offer pages were rebuilt.
+
+1. Claude Code draws the content tree in Excalidraw (`excalidraw-wireframes` skill): what the site offers, grouped how, with the current state and **two leads** side by side, a parking area for the items not placed yet and the open questions, one group per item so that the owner moves the cards by hand.
+2. The owner moves the cards, compares the leads, and chooses; Claude Code redraws the chosen lead, completed.
+3. The URLs follow from the tree: write them in `specs.md` (URLs and redirects), and the former ones, with their redirects, in `src/data/urls.json`.
+4. The same tool serves any question of structure: the navigation, the sitemap, a grouping of offers.
+
+## Wireframes
 
 Goal: agree on the **layout** of each page type, without colors or code, in a format the owner can edit.
 
@@ -72,7 +136,7 @@ Working with the file:
 - The VS Code extension does **not** save by itself, unlike excalidraw.com: press **Ctrl+S** before asking Claude Code to read the file.
 - The extension keeps the drawing in memory and doesn't reload the file when it changes on disk. Before Claude Code rewrites the file, save and close its tab; afterwards, reopen it, and never save the old tab over the new file.
 
-## 4. Mock-up
+## Mock-up
 
 Goal: choose the style with real content, every page and every state, before building the site.
 
@@ -97,7 +161,7 @@ The `html-mockups` skill carries out this phase, from a starting page with the s
    then open `http://127.0.0.1:<port>/docs/mockups/<file>.html`, and reload after each change.
 6. Claude Code checks its own changes with headless screenshots before asking for a review, and exports one large PNG per style to `outputs/` to compare them at a glance. A test that needs extra code runs on a copy of the page, never on the file the owner has open.
 
-## 5. Design system
+## Design system
 
 Goal: write down the visual choices once, so that every page stays consistent.
 
@@ -111,7 +175,7 @@ Write them in `docs/branding.md`, as named tokens, next to the decisions they co
 
 The mock-up is then updated to use exactly these tokens, compared with screenshots taken before the rewrite to see which shifts matter; its `:root` becomes `src/styles/tokens.css`. At the end of the phase, add an entry to [design-journal.md](design-journal.md), here and in the template: the choices kept, the ones rejected, and why.
 
-## 6. Build
+## Build
 
 The template already holds the skeleton: layouts, tokens, not-found and redirect pages, sitemap, Open Graph, favicon, checks, CI and deployment. The first build step adapts it to the mock-up (tokens, fonts, header and footer) and turns on the deployment.
 
@@ -126,7 +190,7 @@ For each step of `roadmap.md`, in order:
 
 The owner looks at the preview on their phone after each page step, rather than all the pages at the end. When a bug reaches the owner that a check could have caught, the fix adds the check.
 
-## 7. Launch
+## Launch
 
 1. The owner checks every page on the `github.io` address, at phone and desktop width.
 2. The site is ready to share: not-found page, redirect pages, sitemap, `robots.txt`, favicon, Open Graph tags and the preview card, checked with the LinkedIn Post Inspector and the Facebook Sharing Debugger.
@@ -135,30 +199,14 @@ The owner looks at the preview on their phone after each page step, rather than 
 5. Once the domain points to GitHub Pages: set the custom domain in the Pages settings, enforce HTTPS, delete the `SITE_URL` and `BASE_PATH` repository variables and run the deployment again, then check that `www` and `github.io` redirect to the domain.
 6. Submit the sitemap to the search engines (Google Search Console, Bing Webmaster Tools) if the owner wants to.
 
-## 8. Retrospective
+## Retrospective
 
-After the launch, or after any phase that went badly:
+At the end of each cycle (the first one ends with the launch), or after any tool that went badly:
 
 1. What took longer than expected? What had to be redone? What did the owner like most?
-2. Sort what is left: the small touches go to the « Later » list of `roadmap.md` for the polish (phase 9), the larger ideas to the same list for a next cycle (phase 10).
-3. Update this file, and the template (`CLAUDE.md`, `process.md`, the skills, the skeleton) when the lesson applies to every website.
-
-## 9. Polish
-
-Optional: once the site is online and the lessons written, the small touches that were noted and set aside (`roadmap.md`, Later), before anything new.
-
-1. Claude Code lists the touches of the « Later » list (a detail of a component, a micro-animation, a text, the weight of an image, an accessibility or performance audit), each with its cost; the owner picks the ones worth doing now.
-2. One small pull request per touch, or per group of touches on the same page, with the checks and, for code, the code review. No new page and no change of the content tree here: those belong to a new cycle.
-3. A touch of the design is tried first in the mock-up when it isn't obvious, and written in `docs/branding.md`.
-
-## 10. Next cycle
-
-The ideas that need more than a touch (a new page type, a new kind of content, a section of testimonials, a translation) make the next cycle, which runs the phases again for its own scope.
-
-1. With the owner, choose the scope of the cycle from the « Later » list and the new needs; give it a goal in one sentence.
-2. Update `specs.md` first (and the content tree, in Excalidraw, if the structure changes), then write the steps of the cycle in `roadmap.md` under a heading of their own (« Cycle 2: testimonials and English version »), numbered after the last step: the steps of the cycles done stay as one line each.
-3. Run only the phases that apply: a new page type goes through its wireframe and mock-up (phases 3 and 4), a new token through `docs/branding.md` (phase 5); a new text goes straight to the build. The launch of a cycle is the merge of its last step, unless it changes the URLs or the domain.
-4. End the cycle with its retrospective (phase 8), then polish or start the next one.
+2. Sort the backlog: the leftovers and the ideas of the cycle go in, what is done or no longer wanted goes out.
+3. Read Claude Code's memory of the project: a rule or a preference that holds for the whole project moves to `CLAUDE.md` or this file, where the next sessions and the templates find it.
+4. Update this file, and the template (`CLAUDE.md`, `process.md`, the skills, the skeleton) when the lesson applies to every website.
 
 ## Lessons learned
 
@@ -186,3 +234,5 @@ The lessons of the previous projects:
 | sylent.art | A worktree outside the folder open in VS Code is invisible to the owner: work on the branch in the main folder while they test nothing there. |
 | sylent.art | Open a pull request only once the owner has seen the result (the review applied, the schema looked at). |
 | sylent.art | Two mock-up servers of two projects on the same port broke the owner's page: one port per project, a server without cache. |
+| sylent.art | The classification of the offers ran as a mini-cycle of its own (specifications, then wireframe and mock-up, then build): the unit of the process is the change, not the project. |
+| sylent.art | Ideas kept only in Claude Code's memory are easily lost between sessions, and some wait on other people: a `backlog.md` holds them, and the roadmap only what is chosen. |
