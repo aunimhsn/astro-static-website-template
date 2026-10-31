@@ -18,7 +18,7 @@ The technical choices of the [roadmap](../roadmap.md), with their reasons and th
 | Brand images | `scripts/brand-images.mjs`, in the same Chromium | The favicon and the preview card made again in one command when the brand changes. See [Brand images](#brand-images). |
 | Deployment | GitHub Actions (`.github/workflows/deploy.yml`) on every push to `main`, with `withastro/action` and `actions/deploy-pages` | A merged pull request is deployed without a manual step. See [Deployment](#deployment). |
 | Checks in CI | GitHub Actions (`.github/workflows/ci.yml`) on every pull request | Runs `npm run check`, the same command as before a commit. |
-| Updates | Dependabot (`.github/dependabot.yml`), weekly | npm packages (minor and patch grouped) and GitHub Actions. |
+| Updates | Dependabot (`.github/dependabot.yml`), weekly | npm packages (minor and patch grouped) and GitHub Actions. The `dependency-reviewer` subagent reads its pull requests on demand and recommends, for each, to merge or to set aside (kept on 2026-10-31 to see how it works, before deciding between it and manual updates with security alerts only). |
 
 Rejected:
 
